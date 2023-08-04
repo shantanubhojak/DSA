@@ -1,0 +1,16 @@
+ll mod (ll x) return ((x%m)+m)%m;
+ll add(ll a,ll b) return mod(mod(a)+mod(b));
+ll multiply(ll a,ll b) return mod(mod(a)*mod(b));
+ll modPow(int x,int y)
+{
+    if(y==0) return 1ll;;
+    if(y==1) return (x%m);
+    ll res=1;
+    while(y)
+    {
+        if(y&1)res=multiply(res,x);
+        x=multiply(x,x);
+        y/=2;
+    }
+    return res;
+}
