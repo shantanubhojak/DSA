@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+void initCode()
+{
+#ifndef ONLINE_JUDGE
+freopen("input.txt", "r", stdin);
+freopen("soutput.txt", "w", stdout);
+#endif // ONLINE_JUDGE
+}
+ll m=1000000007;
+//----------------------------------------------------------------------------
+int modadd(int a,int b,int m){ a = a % m;b = b % m; return(((a + b) % m) + m) % m;}
+int modmul(int a,int b,int m){ a = a % m;b = b % m; return(((a * b) % m) + m) % m;}
+int modsub(int a,int b,int m){ a = a % m;b = b % m; return(((a - b) % m) + m) % m;}
+int gcd(int a, int b){ if(b == 0) return a; return gcd(b, a % b);}
+int expo(int a,int n,int md){ int res=1; while(n){ if(n&1) {res = modmul(res,a,md);--n;} else {a = modmul(a,a,md);n = n>>1;}} return res;}
+bool revsort(int a, int b){return a > b;}
+// void swap(auto &x, auto &y){auto temp = x; x = y; y = temp;}
+void google(int T){cout<<"Case #"<<T<<": ";}
+void gt(int T){cerr<<"Case #"<<T<<": "<<endl;}
+vector<bool> sieve(int n){vector<bool> prime(n+1,1); prime[0] = prime[1] = 0; for(int i=2;i*i<=n;i++){if(prime[i]){for(int j=i*i;j<=n;j+=i) prime[j]=0;}} return prime;}
+//--------------------------------------------------------------------------------
+//17 N 1 N 9 N 2 N 11 N 16 N 8 N 5 N 3 N 10 N 13 N 5 N 13 N 7 N 10 N 4 N 7 N 2 N 12 N 16
+//[3,9,20,null,null,15,7]
+string solve()
+{
+   string temp="17 N 1 N 9 N 2 N 11 N 16 N 8 N 5 N 3 N 10 N 13 N 5 N 13 N 7 N 10 N 4 N 7 N 2 N 12 N 16";
+   string ans;
+   ans.push_back('[');
+   string helper;
+   for(auto it: temp)
+   {
+      if(it==' ')
+      {
+         ans.push_back(',');
+      }
+      else if(it=='N')
+      {
+         ans+="null";
+      }
+      else
+      {
+         ans.push_back(it);
+      }
+   }
+   ans.push_back(']');
+   cout<<ans<<endl;
+   return ans;
+}
+int main()
+{
+    initCode();
+    int t=1;
+    // cin>>t;
+    while(t--) solve();
+    return 0;
+}
