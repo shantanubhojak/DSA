@@ -1,0 +1,36 @@
+class disjointSet
+{
+   vector<int>rank,parent;
+    public:
+   disjointSet(int n)
+   {
+       rank.resize(n+1,0);
+       parent.resize(n+1);
+       for(int i=0;i<n+1;i++)parent[i]=i;
+   }
+   // first function is to findParent
+   int findUParent(int temp)
+   {
+      if(temp==parent[temp]) return temp;
+      return parent[temp]=findUParent(parent[temp]);
+      // path compression is also done here
+   }
+   // now we have to do the operation for union
+   void unionByRank(int a, int b)
+   {
+       int parentA=findUParent(a);
+       int parentB=findUParent(b);
+       if(parentA==parentB) return ;
+       if(rank[parentA]>rank[parentB])
+       {
+         rank[parentA]++;
+         parent[parentB]=parentA;
+       }
+       else
+       {
+         rank[parentB]++;
+         parent[parentA]=parentB;
+       }
+       return;
+   }
+};
