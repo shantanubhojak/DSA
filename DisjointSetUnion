@@ -38,6 +38,7 @@ class disjointSet
    {
       int parentA=findUParent(a);
       int parentB=findUParent(b);
+      if(parentA==parentB) return ;
       if(sz[parentA]> sz[parentB])
       {
          parent[parentB]=parentA;
