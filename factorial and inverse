@@ -1,6 +1,7 @@
 // find inverse of a factorial
-int invFact[n],int fact[n];
-void findInverse()
+int invFact[n];
+int fact[n];
+void findInverse(int n)
 {
       fact[0]=1;
       int i;
@@ -9,7 +10,7 @@ void findInverse()
          fact[i] = i*fact[i-1] % mod;
       }
       i--;
-      invFact[i]=expo(fact[i],mod-2,m);
+      invFact[i]=expo(fact[i],mod-2,mod);
       for(i--;i>=0;i--)
       {
          invFact[i]= invFact[i+1] * (i+1) % mod;
