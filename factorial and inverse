@@ -3,9 +3,8 @@ int invfact[n],int fact[n];
 void findInverse()
 {
       fact[0]=1;
-      int i=0;
       int i;
-      for(int i=1;i<n;i++)
+      for( i=1;i<n;i++)
       {
          fact[i] = i*fact[i-1] % mod;
       }
@@ -13,7 +12,7 @@ void findInverse()
       invFact[i]=expo(fact[i],mod-2,m);
       for(i--;i>=0;i--)
       {
-         invFact[i]= invFact[i+1] & (i+1) % mod;
+         invFact[i]= invFact[i+1] * (i+1) % mod;
       }
       return;
 }
