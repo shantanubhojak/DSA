@@ -1,5 +1,5 @@
 // find inverse of a factorial
-int invfact[n],int fact[n];
+int invFact[n],int fact[n];
 void findInverse()
 {
       fact[0]=1;
