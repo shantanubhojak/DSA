@@ -1,0 +1,59 @@
+class SegTree
+{
+public:
+	SegTree(int _n)
+	{
+		n = _n;
+		tree.resize(n * 4, 0);
+	}
+
+	int GetMax(int x) const
+	{
+		return GetRangeValueInternal(0, x, 1, 0, n - 1);
+	}
+
+	void UpdateValue(int index, int newValue)
+	{
+		UpdateValueInternal(index, newValue, 1, 0, n - 1);
+	}
+
+private:
+	int GetRangeValueInternal(int left, int right, int nodeIndex, int nodeRangeLeftIndex, int nodeRangeRightIndex) const
+	{
+		if (left > right)
+			return 0;
+
+		if (left == nodeRangeLeftIndex && right == nodeRangeRightIndex)
+			return tree[nodeIndex];
+
+		int rangeMid = (nodeRangeLeftIndex + nodeRangeRightIndex) / 2;
+		int leftV = GetRangeValueInternal(left, min(right, rangeMid), nodeIndex * 2, nodeRangeLeftIndex, rangeMid);
+		int rightV = GetRangeValueInternal(max(left, rangeMid + 1), right, nodeIndex * 2 + 1, rangeMid + 1, nodeRangeRightIndex);
+		return max(leftV, rightV);
+	}
+
+	void UpdateValueInternal(int index, int newValue, int nodeIndex, int nodeRangeLeftIndex, int nodeRangeRightIndex)
+	{
+		if (nodeRangeLeftIndex == nodeRangeRightIndex)
+		{
+			tree[nodeIndex] = newValue;
+			return;
+		}
+
+		int mid = (nodeRangeLeftIndex + nodeRangeRightIndex) / 2;
+		int leftChild = nodeIndex * 2;
+		int rightChild = leftChild + 1;
+		if (index <= mid)
+		{
+			UpdateValueInternal(index, newValue, leftChild, nodeRangeLeftIndex, mid);
+		}
+		else
+		{
+			UpdateValueInternal(index, newValue, rightChild, mid + 1, nodeRangeRightIndex);
+		}
+		tree[nodeIndex] = max(tree[leftChild], tree[rightChild]);
+	}
+
+	int n;
+	vector<int> tree;
+};
